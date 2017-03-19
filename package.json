@@ -10,7 +10,7 @@
     "src/"
   ],
   "name": "create-textlint-rule-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create textlint rule example from test codes.",
   "main": "lib/index.js",
   "bin": {
