@@ -1,6 +1,7 @@
 // MIT © 2017 azu
 "use strict";
 const getRuleTest = require("./get-rule-test");
+const union = require("lodash.union");
 const defaultOptions = {
     prependValidExample: "**OK**:",
     prependInValidExample: "**NG**:",
@@ -25,12 +26,12 @@ module.exports = function(content, options = {}) {
 
     const validExample = `
 \`\`\`
-${plainValid.join(exampleSeparator)}
+${union(plainValid).join(exampleSeparator)}
 \`\`\`
 `;
     const invalidExample = `
 \`\`\`
-${plainInvalid.map(test => test.text).join(exampleSeparator)}
+${union(plainInvalid.map(test => test.text)).join(exampleSeparator)}
 \`\`\`
 `;
 
