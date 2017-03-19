@@ -36,7 +36,7 @@ module.exports = function loadModule(content, mocks = {}) {
 
     const result = babel.transform(content, {
             "presets": [
-                "latest"
+                require.resolve("babel-preset-latest")
             ]
         }
     );
