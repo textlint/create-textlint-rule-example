@@ -17,7 +17,7 @@ const defaultOptions = {
 module.exports = function(content, options = {}) {
     const prependValidExample = options.prependValidExample || defaultOptions.prependValidExample;
     const prependInValidExample = options.prependInValidExample || defaultOptions.prependInValidExample;
-    const exampleSeparator = options.exampleSeparator || defaultOptions.exampleSeparator;
+    const exampleSeparator = (options.exampleSeparator || defaultOptions.exampleSeparator).replace(/\\n/g, "\n");
     const { ruleName, valid, invalid } = getRuleTest(content);
     const plainValid = valid.filter(text => typeof text === "string");
     const plainInvalid = invalid.filter(test => {
