@@ -2,15 +2,19 @@
 import meow from "meow";
 import concat from "concat-stream";
 import create from "../src/create-textlint-rule-example.js";
-
-const cli = meow(`
+import fs from "fs";
+const cli = meow(
+    `
     Usage
       $ create-textlint-rule-example <file-path>
 
     Options
       --separator separator between each examples
-`);
-const fs = require("fs");
+`,
+    {
+        importMeta: import.meta
+    }
+);
 const file = process.argv[2];
 const input = file && file !== "-" ? fs.createReadStream(process.argv[2]) : process.stdin;
 input.pipe(
