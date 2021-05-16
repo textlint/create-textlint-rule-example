@@ -1,9 +1,9 @@
 // LICENSE : MIT
 "use strict";
-import {RuleHelper} from "textlint-rule-helper";
+import { RuleHelper } from "textlint-rule-helper";
 export default function (context) {
     const helper = new RuleHelper(context);
-    const {Syntax, getSource, RuleError, report} = context;
+    const { Syntax, getSource, RuleError, report } = context;
     return {
         /*
         Match pattern
@@ -23,9 +23,12 @@ export default function (context) {
             const match = text.match(/todo:/i);
             if (match) {
                 const todoText = text.substring(match.index);
-                report(node, new RuleError(`Found TODO: '${todoText}'`, {
-                    index: match.index
-                }));
+                report(
+                    node,
+                    new RuleError(`Found TODO: '${todoText}'`, {
+                        index: match.index
+                    })
+                );
             }
         },
         /*
@@ -40,9 +43,12 @@ export default function (context) {
             const text = context.getSource(node);
             const match = text.match(/\[\s+\]\s/i);
             if (match) {
-                report(node, new context.RuleError(`Found TODO: '${text}'`, {
-                    index: match.index
-                }));
+                report(
+                    node,
+                    new context.RuleError(`Found TODO: '${text}'`, {
+                        index: match.index
+                    })
+                );
             }
         }
     };

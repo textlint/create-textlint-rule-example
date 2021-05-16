@@ -1,7 +1,8 @@
 // MIT © 2017 azu
 "use strict";
-const getRuleTest = require("./get-rule-test");
-const unique = require("lodash.uniq");
+import unique from "lodash.uniq";
+import getRuleTest from "./get-rule-test.js";
+
 const defaultOptions = {
     prependValidExample: "**OK**:",
     prependInValidExample: "**NG**:",
@@ -14,13 +15,13 @@ const defaultOptions = {
  * @param {Object} options
  * @returns {string}
  */
-module.exports = function(content, options = {}) {
+export default function (content, options = {}) {
     const prependValidExample = options.prependValidExample || defaultOptions.prependValidExample;
     const prependInValidExample = options.prependInValidExample || defaultOptions.prependInValidExample;
     const exampleSeparator = (options.exampleSeparator || defaultOptions.exampleSeparator).replace(/\\n/g, "\n");
     const { ruleName, valid, invalid } = getRuleTest(content);
-    const plainValid = valid.filter(text => typeof text === "string");
-    const plainInvalid = invalid.filter(test => {
+    const plainValid = valid.filter((text) => typeof text === "string");
+    const plainInvalid = invalid.filter((test) => {
         return test.options === undefined && test.ext === undefined;
     });
 
@@ -31,12 +32,12 @@ ${unique(plainValid).join(exampleSeparator)}
 `;
     const invalidExample = `
 \`\`\`
-${unique(plainInvalid.map(test => test.text)).join(exampleSeparator)}
+${unique(plainInvalid.map((test) => test.text)).join(exampleSeparator)}
 \`\`\`
 `;
 
     return `${prependValidExample}
 ${validExample}
 ${prependInValidExample}
-${invalidExample}`
-};
+${invalidExample}`;
+}
