@@ -1,27 +1,7 @@
 {
-  "directories": {
-    "test": "test"
-  },
-  "author": "azu",
-  "license": "MIT",
-  "files": [
-    "bin/",
-    "lib/",
-    "src/"
-  ],
   "name": "create-textlint-rule-example",
   "version": "1.1.0",
-  "description": "Create textlint rule example from test codes.",
-  "main": "lib/index.js",
-  "bin": {
-    "create-textlint-rule-example": "bin/cmd.js"
-  },
-  "scripts": {
-    "test": "mocha test/",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
-    "watch": "babel src --out-dir lib --watch --source-maps",
-    "prepublish": "npm run --if-present build"
-  },
+  "description": "A command line tool that create examples from textlint rule's test cases.",
   "keywords": [
     "textlint",
     "tester",
@@ -29,29 +9,44 @@
     "readme",
     "example"
   ],
+  "homepage": "https://github.com/textlint/create-textlint-rule-example",
+  "bugs": {
+    "url": "https://github.com/textlint/create-textlint-rule-example/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/textlint/create-textlint-rule-example.git"
   },
-  "bugs": {
-    "url": "https://github.com/textlint/create-textlint-rule-example/issues"
+  "license": "MIT",
+  "author": "azu",
+  "main": "lib/index.js",
+  "type": "module",
+  "bin": {
+    "create-textlint-rule-example": "bin/cmd.js"
   },
-  "homepage": "https://github.com/textlint/create-textlint-rule-example",
-  "devDependencies": {
-    "babel-cli": "^6.24.0",
-    "babel-register": "^6.24.0",
-    "babel-preset-jsdoc-to-assert": "^4.0.0",
-    "babel-preset-power-assert": "^1.0.0",
-    "cross-env": "^3.2.4",
-    "mocha": "^3.2.0",
-    "power-assert": "^1.4.2"
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "scripts": {
+    "test": "mocha test/",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "watch": "babel src --out-dir lib --watch --source-maps",
+    "prepublish": "npm run --if-present build"
   },
   "dependencies": {
-    "babel-core": "^6.24.0",
-    "babel-preset-latest": "^6.24.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "clone": "^2.1.1",
-    "concat-stream": "^1.6.0",
+    "concat-stream": "^2.0.0",
     "lodash.uniq": "^4.5.0",
-    "meow": "^3.7.0"
+    "meow": "^10.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "mocha": "^8.4.0"
   }
 }

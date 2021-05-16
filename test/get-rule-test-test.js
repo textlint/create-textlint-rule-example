@@ -1,12 +1,13 @@
 // MIT © 2017 azu
 "use strict";
-const path = require("path");
-const getRuleTest = require("../src/get-rule-test");
-const assert = require("assert");
-const fs = require("fs");
+import url from "url";
+import getRuleTest from "../src/get-rule-test.js";
+import assert from "assert";
+import fs from "fs";
+
 describe("get-rule-data", () => {
     it("should return {valid,invalid,ruleName}", () => {
-        const content = fs.readFileSync(path.join(__dirname, "fixtures/no-todo/test/no-todo-test.js"), "utf-8");
+        const content = fs.readFileSync(url.fileURLToPath(new URL("fixtures/no-todo/test/no-todo-test.js", import.meta.url)), "utf-8");
         const calls = getRuleTest(content);
         assert(typeof calls.ruleName === "string");
         assert(Array.isArray(calls.valid));

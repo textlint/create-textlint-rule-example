@@ -1,4 +1,4 @@
-# create-textlint-rule-example [![Build Status](https://travis-ci.org/textlint/create-textlint-rule-example.svg?branch=master)](https://travis-ci.org/textlint/create-textlint-rule-example)
+# create-textlint-rule-example [![Actions Status: test](https://github.com/textlint/create-textlint-rule-example/workflows/test/badge.svg)](https://github.com/textlint/create-textlint-rule-example/actions?query=workflow%3A"test")
 
 Create textlint rule example from test codes([textlint-tester](https://github.com/textlint/textlint-tester "textlint-tester")).
 

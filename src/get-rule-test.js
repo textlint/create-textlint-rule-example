@@ -1,11 +1,10 @@
 // MIT © 2017 azu
 "use strict";
-const vm = require("vm");
-const fs = require("fs");
-const path = require("path");
-const babel = require("babel-core");
-const calls = require("./mock-textlint-tester").calls;
-const MockTextlintRuleTester = require("./mock-textlint-tester");
+import vm from "vm";
+import babel from "@babel/core";
+import {calls} from "./mock-textlint-tester.js";
+import MockTextlintRuleTester from "./mock-textlint-tester.js";
+import { createRequire } from 'module';
 /**
  * Helper for unit testing:
  * - load module with mocked dependencies
@@ -14,10 +13,10 @@ const MockTextlintRuleTester = require("./mock-textlint-tester");
  * @param {string} content
  * @param {Object=} mocks Hash of mocked dependencies
  */
-module.exports = function loadModule(content, mocks = {}) {
+export default function loadModule(content, mocks = {}) {
     const exports = {};
     const context = {
-        require: function(name) {
+        require: function (name) {
             if (mocks[name]) {
                 return mocks[name];
             }
@@ -33,13 +32,13 @@ module.exports = function loadModule(content, mocks = {}) {
             exports: exports
         }
     };
-
+    const require = createRequire(import.meta.url);
     const result = babel.transform(content, {
             "presets": [
-                require.resolve("babel-preset-latest")
+                require.resolve("@babel/preset-env")
             ]
         }
     );
     vm.runInNewContext(result.code, context);
     return calls;
-};
+}

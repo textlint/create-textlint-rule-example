@@ -1,7 +1,8 @@
 // MIT © 2017 azu
 "use strict";
-const getRuleTest = require("./get-rule-test");
-const unique = require("lodash.uniq");
+import unique from "lodash.uniq"
+import getRuleTest from "./get-rule-test.js";
+
 const defaultOptions = {
     prependValidExample: "**OK**:",
     prependInValidExample: "**NG**:",
@@ -14,7 +15,7 @@ const defaultOptions = {
  * @param {Object} options
  * @returns {string}
  */
-module.exports = function(content, options = {}) {
+export default function (content, options = {}) {
     const prependValidExample = options.prependValidExample || defaultOptions.prependValidExample;
     const prependInValidExample = options.prependInValidExample || defaultOptions.prependInValidExample;
     const exampleSeparator = (options.exampleSeparator || defaultOptions.exampleSeparator).replace(/\\n/g, "\n");
@@ -39,4 +40,4 @@ ${unique(plainInvalid.map(test => test.text)).join(exampleSeparator)}
 ${validExample}
 ${prependInValidExample}
 ${invalidExample}`
-};
+}
