@@ -11,15 +11,18 @@ const defaultOptions = {
 };
 /**
  * Create example text from `content`
- * @param {string} content
+ * @param {{content:string, filePath:string}}
  * @param {Object} options
  * @returns {string}
  */
-export default function (content, options = {}) {
+export default function ({ content, filePath }, options = {}) {
     const prependValidExample = options.prependValidExample || defaultOptions.prependValidExample;
     const prependInValidExample = options.prependInValidExample || defaultOptions.prependInValidExample;
     const exampleSeparator = (options.exampleSeparator || defaultOptions.exampleSeparator).replace(/\\n/g, "\n");
-    const { ruleName, valid, invalid } = getRuleTest(content);
+    const { ruleName, valid, invalid } = getRuleTest({
+        content,
+        filePath
+    });
     const plainValid = valid.filter((text) => typeof text === "string");
     const plainInvalid = invalid.filter((test) => {
         return test.options === undefined && test.ext === undefined;

@@ -5,15 +5,17 @@ import babel from "@babel/core";
 import { calls } from "./mock-textlint-tester.js";
 import MockTextlintRuleTester from "./mock-textlint-tester.js";
 import { createRequire } from "module";
+import path from "path";
+
 /**
  * Helper for unit testing:
  * - load module with mocked dependencies
  * - allow accessing private state of the module
  *
- * @param {string} content
+ * @param {{content:string, filePath:string}}
  * @param {Object=} mocks Hash of mocked dependencies
  */
-export default function loadModule(content, mocks = {}) {
+export default function loadModule({ content, filePath }, mocks = {}) {
     const exports = {};
     const context = {
         require: function (name) {
@@ -34,7 +36,8 @@ export default function loadModule(content, mocks = {}) {
     };
     const require = createRequire(import.meta.url);
     const result = babel.transform(content, {
-        presets: [require.resolve("@babel/preset-env")]
+        filename: path.basename(filePath),
+        presets: [require.resolve("@babel/preset-env"), require.resolve("@babel/preset-typescript")]
     });
     vm.runInNewContext(result.code, context);
     return calls;

@@ -3,6 +3,7 @@ import meow from "meow";
 import concat from "concat-stream";
 import create from "../src/create-textlint-rule-example.js";
 import fs from "fs";
+
 const cli = meow(
     `
     Usage
@@ -15,14 +16,18 @@ const cli = meow(
         importMeta: import.meta
     }
 );
-const file = process.argv[2];
-const input = file && file !== "-" ? fs.createReadStream(process.argv[2]) : process.stdin;
+const filePath = process.argv[2];
+const input = filePath && filePath !== "-" ? fs.createReadStream(process.argv[2]) : process.stdin;
 input.pipe(
     concat(function (buf) {
+        const content = buf.toString("utf8");
         console.log(
-            create(buf.toString("utf8"), {
-                exampleSeparator: cli.flags.separator
-            })
+            create(
+                { content, filePath },
+                {
+                    exampleSeparator: cli.flags.separator
+                }
+            )
         );
     })
 );
