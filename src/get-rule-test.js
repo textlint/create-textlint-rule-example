@@ -2,9 +2,9 @@
 "use strict";
 import vm from "vm";
 import babel from "@babel/core";
-import {calls} from "./mock-textlint-tester.js";
+import { calls } from "./mock-textlint-tester.js";
 import MockTextlintRuleTester from "./mock-textlint-tester.js";
-import { createRequire } from 'module';
+import { createRequire } from "module";
 /**
  * Helper for unit testing:
  * - load module with mocked dependencies
@@ -34,11 +34,8 @@ export default function loadModule(content, mocks = {}) {
     };
     const require = createRequire(import.meta.url);
     const result = babel.transform(content, {
-            "presets": [
-                require.resolve("@babel/preset-env")
-            ]
-        }
-    );
+        presets: [require.resolve("@babel/preset-env")]
+    });
     vm.runInNewContext(result.code, context);
     return calls;
 }

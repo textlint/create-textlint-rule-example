@@ -10,13 +10,15 @@ const cli = meow(`
     Options
       --separator separator between each examples
 `);
-const fs = require('fs');
+const fs = require("fs");
 const file = process.argv[2];
-const input = file && file !== '-'
-    ? fs.createReadStream(process.argv[2])
-    : process.stdin;
-input.pipe(concat(function (buf) {
-    console.log(create(buf.toString('utf8'), {
-        exampleSeparator: cli.flags.separator
-    }));
-}));
+const input = file && file !== "-" ? fs.createReadStream(process.argv[2]) : process.stdin;
+input.pipe(
+    concat(function (buf) {
+        console.log(
+            create(buf.toString("utf8"), {
+                exampleSeparator: cli.flags.separator
+            })
+        );
+    })
+);

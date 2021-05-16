@@ -4,10 +4,10 @@ import clone from "clone";
 
 const calls = {};
 export default class MockTextlintRuleTester {
-    run(ruleName, rule, {valid, invalid}) {
+    run(ruleName, rule, { valid, invalid }) {
         calls.ruleName = ruleName;
         calls.valid = clone(valid);
         calls.invalid = clone(invalid);
     }
 }
-export {calls}
+export { calls };
