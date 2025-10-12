@@ -1,33 +1,56 @@
 #!/usr/bin/env node
-import meow from "meow";
-import concat from "concat-stream";
+import { parseArgs } from "node:util";
+import { createRequire } from "node:module";
+import { text } from "node:stream/consumers";
 import create from "../src/create-textlint-rule-example.js";
 import fs from "fs";
 
-const cli = meow(
-    `
+const require = createRequire(import.meta.url);
+const pkg = require("../package.json");
+
+const helpText = `
     Usage
       $ create-textlint-rule-example <file-path>
 
     Options
       --separator separator between each examples
-`,
-    {
-        importMeta: import.meta
-    }
-);
-const filePath = process.argv[2];
-const input = filePath && filePath !== "-" ? fs.createReadStream(process.argv[2]) : process.stdin;
-input.pipe(
-    concat(function (buf) {
-        const content = buf.toString("utf8");
-        console.log(
-            create(
-                { content, filePath },
-                {
-                    exampleSeparator: cli.flags.separator
-                }
-            )
-        );
-    })
+      --help      Show this help
+      --version   Show version
+`;
+
+const { values, positionals } = parseArgs({
+    options: {
+        separator: {
+            type: "string"
+        },
+        help: {
+            type: "boolean"
+        },
+        version: {
+            type: "boolean"
+        }
+    },
+    allowPositionals: true
+});
+
+if (values.help) {
+    console.log(helpText);
+    process.exit(0);
+}
+
+if (values.version) {
+    console.log(pkg.version);
+    process.exit(0);
+}
+
+const filePath = positionals[0];
+const input = filePath && filePath !== "-" ? fs.createReadStream(filePath) : process.stdin;
+const content = await text(input);
+console.log(
+    create(
+        { content, filePath },
+        {
+            exampleSeparator: values.separator
+        }
+    )
 );
