@@ -1,6 +1,6 @@
 {
   "name": "create-textlint-rule-example",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A command line tool that create examples from textlint rule's test cases.",
   "keywords": [
     "textlint",
