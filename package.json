@@ -40,13 +40,9 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-typescript": "^7.13.0",
-    "clone": "^2.1.1",
-    "concat-stream": "^2.0.0",
-    "lodash.uniq": "^4.5.0",
-    "meow": "^10.0.0"
+    "lodash.uniq": "^4.5.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "lint-staged": "^11.0.0",
     "mocha": "^8.4.0",
     "prettier": "^2.3.0"
